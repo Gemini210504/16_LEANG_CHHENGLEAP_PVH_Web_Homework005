@@ -1,14 +1,53 @@
 "use client";
 
-import { Input, Button } from "@heroui/react";
-import { useState } from "react";
-import { usePathname, useSearchParams } from "next/navigation"; 
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { searchBookByTitle } from "@/service/book-service";
+import { Input } from "@heroui/react";
 
-export default function SearchBarComponent() {
-  
+export default function SearchBarComponent({ searchParams }) {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const router = useRouter();
+
+  const fetchSearchResults = async (query) => {
+    if (query) {
+      const results = await searchBookByTitle(query);
+      setSearchResults(results); 
+    }
+  };
+
+  const handleSearchChange = (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+
+    if (query) {
+      router.push(`/book_category?search=${encodeURIComponent(query)}`);
+    } else {
+      router.push("/");
+    }
+  };
+
+  useEffect(() => {
+    const query = searchParams?.search || "";
+    setSearchQuery(query);
+    if (query) {
+      fetchSearchResults(query);
+    }
+  }, [searchParams]);
+
+  const onSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery) {
+      router.push(`/book_category?search=${encodeURIComponent(searchQuery)}`);
+    } else {
+      router.push("/"); 
+    }
+  };
+
   return (
     <div className="w-[95%] p-5 mx-auto mb-5">
-      <form >
+      <form onSubmit={onSearch}>
         <div className="relative">
           <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
             <svg
@@ -34,6 +73,8 @@ export default function SearchBarComponent() {
               className="w-full ps-10 text-sm text-gray-900"
               placeholder="Search book or category"
               required
+              value={searchQuery}
+              onChange={handleSearchChange}
             />
           </div>
         </div>

@@ -1,5 +1,4 @@
 export const getAllBook = async () => {
-  
   const res = await fetch(`https://nextjs-homework005.vercel.app/api/book`);
   // const res = await fetch(
   //   `https://nextjs-homework005.vercel.app/api/book${
@@ -8,34 +7,30 @@ export const getAllBook = async () => {
   // );
   const dataBook = await res.json();
   return dataBook;
-}
-
-export const getBookById = async (bookId) =>{
-    const res = await fetch(
-      `https://nextjs-homework005.vercel.app/api/book/${bookId}`
-    );
-    const book = await res.json();
-    return book;
-}
-
-
-export const getBooksByCategory = async (categoryId) => {
-    const response = await fetch(
-      `https://nextjs-homework005.vercel.app/api/book?query=${categoryId}`
-    );
-    const dataBookByCategory = response.json();
-
-    return dataBookByCategory;
-    
 };
 
-export const searchBookByTitle = async (search) =>{
- const res = await fetch(
-   `https://nextjs-homework005.vercel.app/api/book?search=${search}`
- );
+export const getBookById = async (bookId) => {
+  const res = await fetch(
+    `https://nextjs-homework005.vercel.app/api/book/${bookId}`
+  );
+  const book = await res.json();
+  return book;
+};
 
-  const searchBookByTitle = res.json();
+export const getBooksByCategory = async (categoryId) => {
+  const response = await fetch(
+    `https://nextjs-homework005.vercel.app/api/book?query=${categoryId}`
+  );
+  const dataBookByCategory = response.json();
+
+  return dataBookByCategory;
+};
+
+export const searchBookByTitle = async (search) => {
+  const res = await fetch(
+    `https://nextjs-homework005.vercel.app/api/book?search=${encodeURIComponent(search)}`
+  );
+  const searchBookByTitle = await res.json();  
   return searchBookByTitle;
-  
-}
+};
 

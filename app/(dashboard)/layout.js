@@ -12,7 +12,7 @@ export default function Layout({children}) {
         </aside>
 
         <main className="sm:col-span-9 flex flex-col w-full max-h-screen">
-          <SearchBarComponent />
+          <SearchBarComponent  />
 
           <div className="bg-[#f8f9fa] w-[90%] mx-auto rounded-[30px] shadow-large overflow-scroll">
             
