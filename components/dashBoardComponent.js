@@ -1,4 +1,5 @@
 
+
 import React from "react";
 import ButtonComponent from "./dashboard/homepage/button-component";
 import FilterBookSelectComponent from "./filterBook-component";
@@ -17,7 +18,7 @@ export default function DashboardComponent({
             <ButtonComponent buttonName={buttonName} />
           </div>
 
-          <div>
+          <div >
             {book_category && <FilterBookSelectComponent  />}
             {cartoonPage && <FilterCartoonSelectComponent  />}
           </div>

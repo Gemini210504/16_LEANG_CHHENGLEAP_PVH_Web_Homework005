@@ -25,3 +25,13 @@ export const getCartoonById = async (cartoonId) => {
 };
 
 
+export const getCartoonByGenre = async (genreId) => {
+  const response = await fetch(
+    `https://nextjs-homework005.vercel.app/api/cartoon?genre=${genreId}}`
+  );
+  const dataCartoonBygGenre = response.json();
+
+  return dataCartoonBygGenre;
+};
+
+
