@@ -9,6 +9,12 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
-const eslintConfig = [...compat.extends("next/core-web-vitals")];
+const eslintConfig = [
+  // Extend the "next/core-web-vitals" config
+  ...compat.extends("next/core-web-vitals"),
+
+  // Add Tailwind CSS linting support
+  "plugin:tailwindcss/recommended",
+];
 
 export default eslintConfig;
